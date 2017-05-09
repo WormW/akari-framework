@@ -92,7 +92,7 @@ class Context {
      * 是否在测试模式
      * @var bool
      */
-    public static $testing = FALSE;
+    public static $testing = true;
 
     public static function registerNamespace($namespace, $dir) {
         Context::$nsPaths[$namespace] = $dir;
@@ -316,12 +316,12 @@ class akari extends Injectable{
             $lock = glob(Context::$appBasePath . DIRECTORY_SEPARATOR . "*.lock");
             $mode = NULL;
 
-            if (isset($lock[0])) {
-                $mode = ucfirst(basename($lock[0], ".lock"));
-            } else {
-                $cfgMode = get_cfg_var("akari.MODE");
+//            if (isset($lock[0])) {
+//                $mode = ucfirst(basename($lock[0], ".lock"));
+//            } else {
+                $cfgMode = AKARI_MODE;
                 if (!empty($cfgMode)) $mode = ucfirst($cfgMode);
-            }
+
         }
 
         return $mode;
